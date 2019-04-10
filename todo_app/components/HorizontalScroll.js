@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import { View, StyleSheet, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import TaskGroup from './TaskGroup';
 import PropTypes from 'prop-types';
 
@@ -30,14 +30,17 @@ export default class Scroll extends Component {
 
         {this.props.taskGroups.map((data, index) => {
             return(
-                <View style={styles.view}>
-                    <TaskGroup key={data.id}
+                <TouchableOpacity style={styles.view}
+                key={data.id}
+                activeOpacity={0.9}
+                >
+                    <TaskGroup 
                     taskGroup={data}
                     toggleStatus={this.props.toggleStatus}
                     addTask={this.props.addTask}
                     id={data.id}
                     />
-                </View>
+                </TouchableOpacity>
             )
         })}
       </ScrollView>
@@ -50,6 +53,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   view: {
+    width: 260,
     backgroundColor: "#fff",
     borderRadius: 30,
     padding : 30,
@@ -59,6 +63,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 2,
     elevation: 1,
+    alignItems: "flex-start"
   },
 });
 

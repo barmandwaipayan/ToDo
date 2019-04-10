@@ -9,6 +9,8 @@ export default class TodoItem extends React.Component {
       return(
         <View style={styles.todoItem}> 
             <CheckBox
+            uncheckedColor="pink"
+              containerStyle={styles.checkBox}
               style={styles.checkBox}
               value={this.props.completed}
               onChange={() => {
@@ -16,7 +18,7 @@ export default class TodoItem extends React.Component {
                 }
               } 
             />
-            <Text style={ (this.props.completed) ? styles.txtCompleted : styles.txt }>    
+            <Text numberOfLines={1} ellipsizeMode='tail' style={ (this.props.completed) ? styles.txtCompleted : styles.txt }>    
                 <Text>{ this.props.activity}</Text>
                 <Text> from </Text>
                 <Text style={styles.time}> { this.props.from.getHours() } : { this.props.from.getMinutes() } </Text>
@@ -28,8 +30,10 @@ export default class TodoItem extends React.Component {
     } 
     else {
       return(
-        <View>
+        <View style={styles.todoItem} >
           <CheckBox
+          uncheckedColor="pink"
+            containerStyle={styles.checkBox}
             style={styles.checkBox}
             value={this.props.completed}
             onChange={() => {
@@ -37,7 +41,7 @@ export default class TodoItem extends React.Component {
               }
             } 
           />
-          <Text style={ (this.props.completed)? styles.txtCompleted : styles.txt }>
+          <Text numberOfLines={1} ellipsizeMode='tail' style={ (this.props.completed)? styles.txtCompleted : styles.txt }>
             <Text>{this.props.activity}</Text>
             <Text> at </Text>
             <Text style={styles.time}> { this.props.from.getHours() } : { this.props.from.getMinutes() } </Text>
@@ -50,20 +54,21 @@ export default class TodoItem extends React.Component {
 
 const styles = StyleSheet.create({
     checkBox: {
-
+      
     },
     todoItem: {
+      flexDirection: "row",
     },
     time: {
       color: 'green',
     },
     txt:{
       color: 'rgb(148, 163, 166)',
-      marginTop: 5,
+      margin: 5,
     },
     txtCompleted:{
       color: 'rgb(186, 204, 217)',
-      marginTop: 5,
+      margin: 5,
       textDecorationLine: "line-through",
       textDecorationStyle: "solid",
       textDecorationColor: "rgb(158, 188, 218)",

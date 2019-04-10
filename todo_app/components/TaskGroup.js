@@ -20,8 +20,10 @@ export default class TaskGroup extends Component {
         }
         return (
             <View style={styles.taskGroup}>
-                <TaskGroupTitle header={this.props.taskGroup.title} />
-                <AddTask addTask={this.props.addTask} id={this.props.id} />
+                <View style={styles.headRow}>
+                    <TaskGroupTitle header={this.props.taskGroup.title} />
+                    <AddTask addTask={this.props.addTask} id={this.props.id} />
+                </View>
                 <View>
                     {rows}
                 </View>
@@ -32,9 +34,11 @@ export default class TaskGroup extends Component {
 
 styles = StyleSheet.create({
     taskGroup: {
-        alignItems: 'center',
         padding: 10,
         margin: 20,
+    },
+    headRow: {
+        flexDirection: "row",
     }
 })
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Alert,Text, View, CheckBox, StyleSheet} from 'react-native';
 import Scroll from './HorizontalScroll';
+import HeaderGroup from "./HeaderGroup"
 import uuidv4 from 'uuid'
 
 export default class TaskGroupList extends Component {
@@ -48,7 +49,7 @@ export default class TaskGroupList extends Component {
                             id: uuidv4(),
                         },
                         {
-                            activity: "rest2",
+                            activity: "resdwsdt2",
                             from: t3,
                             to: t4,
                             completed: false,
@@ -107,6 +108,8 @@ export default class TaskGroupList extends Component {
         },
         this.toggleStatus = this.toggleStatus.bind(this);
         this.helpIdGenerator = this.helpIdGenerator.bind(this);
+        this.addTask = this.addTask.bind(this);
+        this.addTaskGroup = this.addTaskGroup.bind(this);
     }
 
     toggleStatus = (id) => {
@@ -124,8 +127,7 @@ export default class TaskGroupList extends Component {
     }
 
     addTask = (id, activity, from, to, completed) => {
-        // alert(id)
-        taskGroupsTemp = this.taskGroups;
+        var taskGroupsTemp = [...this.state.taskGroups]
         for(var i=0; i < taskGroupsTemp.length; i++) {
             if(taskGroupsTemp[i].id == id) {
                 taskGroupsTemp[i].taskList.push({
@@ -144,6 +146,19 @@ export default class TaskGroupList extends Component {
         
     }
 
+    addTaskGroup = (title) => {
+        var taskGroupsTemp = [...this.state.taskGroups]
+        taskGroupsTemp.push({
+            title,
+            id: uuidv4(),
+            taskList: []
+        }
+        )
+        this.setState({
+            taskGroups: taskGroupsTemp,
+        })  
+    }
+
     helpIdGenerator = () => {
         const uuidv4 = require('uuid/v4')
         return uuidv4
@@ -152,9 +167,10 @@ export default class TaskGroupList extends Component {
     render() {
         return (
             <View style={styles.taskHorizontalScroll}>
+                <HeaderGroup addTaskGroup={this.addTaskGroup} />
                 <Scroll taskGroups = {this.state.taskGroups}
                 toggleStatus={this.toggleStatus}
-                addTask = {this.addTask}
+                addTask={this.addTask}
                 />
             </View>
         )
