@@ -2,38 +2,44 @@ import React, { Component } from 'react'
 import { Text, View, CheckBox, StyleSheet} from 'react-native';
 import TodoItem from "./TodoItem"
 import TaskGroupTitle from "./TaskGroupTitle"
+import AddTask from "./AddTask"
+import PropTypes from 'prop-types';
 
 export default class TaskGroup extends Component {
-    constructor(prop){
-        super(prop);
-        state = {
-            title: "task group 1",
-            taskLists: [
-                {
-                    activity: "rest",
-                    from: "11:11",
-                    to: "12:00",
-                },
-                {
-                    activity: "rest1",
-                    from: "1:11",
-                    to: "2:00",
-                },
-                {
-                    activity: "rest2",
-                    from: "1:44",
-                    to: "3:30",
-                },
-            ],
-        }
-    }
-    
     render() {
+        var rows = [];
+        for(var i = 0; i < this.props.taskGroup.taskList.length; i++){
+            rows.push(<TodoItem key={this.props.taskGroup.taskList[i].id}
+                activity={this.props.taskGroup.taskList[i].activity}
+                from={this.props.taskGroup.taskList[i].from}
+                to={this.props.taskGroup.taskList[i].to}
+                completed={this.props.taskGroup.taskList[i].completed} 
+                id={this.props.taskGroup.taskList[i].id}
+                toggleStatus={this.props.toggleStatus}
+                />);
+        }
         return (
-            <View>
-                <Text>{this.state.title}</Text>
-                {/* <TaskGroupTitle header={this.state.title}/> */}
+            <View style={styles.taskGroup}>
+                <TaskGroupTitle header={this.props.taskGroup.title} />
+                <AddTask addTask={this.props.addTask} id={this.props.id} />
+                <View>
+                    {rows}
+                </View>
             </View>
         )
     }
 }
+
+styles = StyleSheet.create({
+    taskGroup: {
+        alignItems: 'center',
+        padding: 10,
+        margin: 20,
+    }
+})
+
+TaskGroup.propTypes = {
+    addTask: PropTypes.func,
+    taskGroup: PropTypes.object,
+    toggleStatus: PropTypes.func,
+  };

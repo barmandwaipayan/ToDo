@@ -1,30 +1,46 @@
 import React, { Component } from 'react';
 import { Text, View, CheckBox, StyleSheet} from 'react-native';
+import PropTypes from 'prop-types';
 
 export default class TodoItem extends React.Component {
   render(){
-    if (this.props.to){
+    if (this.props.to.getHours() != this.props.from.getHours() || 
+    this.props.to.getMinutes() != this.props.from.getMinutes()){
       return(
         <View style={styles.todoItem}> 
-            <CheckBox onvalueChange={() => {}}/>
-            <Text style={styles.txt}>    
-                <Text>{this.props.activity}</Text>
+            <CheckBox
+              style={styles.checkBox}
+              value={this.props.completed}
+              onChange={() => {
+                this.props.toggleStatus(this.props.id);
+                }
+              } 
+            />
+            <Text style={ (this.props.completed) ? styles.txtCompleted : styles.txt }>    
+                <Text>{ this.props.activity}</Text>
                 <Text> from </Text>
-                <Text style={styles.time}> { this.props.from } </Text>
+                <Text style={styles.time}> { this.props.from.getHours() } : { this.props.from.getMinutes() } </Text>
                 <Text> to </Text>
-                <Text style={styles.time}> { this.props.to } </Text>
+                <Text style={styles.time}> { this.props.to.getHours() } : { this.props.to.getMinutes() } </Text>
             </Text>
         </View> 
       )
     } 
     else {
       return(
-        <View style={styles.todoItem}>
-          <CheckBox onvalueChange={() => {}}/>
-          <Text style={styles.txt}>
+        <View>
+          <CheckBox
+            style={styles.checkBox}
+            value={this.props.completed}
+            onChange={() => {
+              this.props.toggleStatus(this.props.id);
+              }
+            } 
+          />
+          <Text style={ (this.props.completed)? styles.txtCompleted : styles.txt }>
             <Text>{this.props.activity}</Text>
             <Text> at </Text>
-            <Text style={styles.time}> { this.props.from } </Text>
+            <Text style={styles.time}> { this.props.from.getHours() } : { this.props.from.getMinutes() } </Text>
           </Text>
         </View>
       )
@@ -35,16 +51,29 @@ export default class TodoItem extends React.Component {
 const styles = StyleSheet.create({
     checkBox: {
 
-
     },
     todoItem: {
-        flexDirection: 'row',
     },
     time: {
-        color: 'blue',
+      color: 'green',
     },
     txt:{
-        marginTop: 5,
+      color: 'rgb(148, 163, 166)',
+      marginTop: 5,
+    },
+    txtCompleted:{
+      color: 'rgb(186, 204, 217)',
+      marginTop: 5,
+      textDecorationLine: "line-through",
+      textDecorationStyle: "solid",
+      textDecorationColor: "rgb(158, 188, 218)",
     }
 }
 )
+
+TodoItem.propTypes = {
+  from: PropTypes.object,
+  to: PropTypes.object,
+  id: PropTypes.string,
+  activity: PropTypes.string,
+};

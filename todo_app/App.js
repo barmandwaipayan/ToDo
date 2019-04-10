@@ -8,16 +8,21 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
-import TaskGroup from "./components/TaskGroup"
-import TaskGroupTitle from "./components/TaskGroupTitle"
-
+import TaskGroupList from './components/TaskGroupList';
 
 export default class App extends Component {
   render() {
     return (
-      <View>
-        <TaskGroup />
+      <View style={styles.app} >
+        <TaskGroupList />
       </View>
     );
   }
 }
+
+styles = StyleSheet.create({
+  app: {
+    flex: 1,
+    backgroundColor: "rgb(237,241,244)",
+  }
+})
