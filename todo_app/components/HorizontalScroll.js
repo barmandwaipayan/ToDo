@@ -16,7 +16,7 @@ export default class Scroll extends Component {
       <ScrollView
         ref={(scrollView) => { this.scrollView = scrollView; }}
         style={styles.container}
-        //pagingEnabled={true}
+        pagingEnabled={true}
         horizontal= {true}
         decelerationRate={0}
         snapToInterval={width - 60}
@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
     width: 260,
     backgroundColor: "#fff",
     borderRadius: 30,
-    padding : 30,
     margin: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 5 },

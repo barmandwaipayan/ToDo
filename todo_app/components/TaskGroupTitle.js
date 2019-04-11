@@ -6,15 +6,15 @@ export default class TaskGroupTitle extends Component {
   render() {
     return (
         <View>
-            <Text>{this.props.header}</Text>
+            <Text style={styles.header}>{this.props.header}</Text>
         </View>
     )
   }
 }
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
     header: {
-
+        fontSize: 20,
     }
 })
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, CheckBox, StyleSheet} from 'react-native';
+import { TouchableWithoutFeedback, View, CheckBox, StyleSheet, ScrollView} from 'react-native';
 import TodoItem from "./TodoItem"
 import TaskGroupTitle from "./TaskGroupTitle"
 import AddTask from "./AddTask"
@@ -21,24 +21,38 @@ export default class TaskGroup extends Component {
         return (
             <View style={styles.taskGroup}>
                 <View style={styles.headRow}>
-                    <TaskGroupTitle header={this.props.taskGroup.title} />
-                    <AddTask addTask={this.props.addTask} id={this.props.id} />
+                    <View style={{flex:3,}}>
+                        <TaskGroupTitle header={this.props.taskGroup.title} />
+                    </View>
+                    <View style={{flex:1,}}>
+                        <AddTask addTask={this.props.addTask} id={this.props.id} />
+                    </View>
                 </View>
-                <View>
-                    {rows}
+                <View style={{flex:6,}}>
+                    <TouchableWithoutFeedback>
+                        <ScrollView bounces={true}
+                            indicatorStyle={"white"}
+                            bouncesZoom = {true}
+                        >
+                            {rows}
+                        </ScrollView>
+                    </TouchableWithoutFeedback>
                 </View>
             </View>
         )
     }
 }
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
     taskGroup: {
-        padding: 10,
-        margin: 20,
+        margin: "auto",
     },
     headRow: {
+        flex: 1,
         flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 20,
     }
 })
 

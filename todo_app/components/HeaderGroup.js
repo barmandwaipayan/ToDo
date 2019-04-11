@@ -21,17 +21,25 @@ export default class HeaderGroup extends Component {
   }
 }
 
-styles=StyleSheet.create({
+const styles=StyleSheet.create({
     addButton: {
+        flex: 1,
         backgroundColor: "rgb(251, 45, 75)",
-        padding: 5,
+        margin: "auto",
         borderRadius: 5,
-        alignItems: "flex-end"
+        width: 20,
+        height: 30,
+        alignItems: "center",
+        paddingTop: 5,
     },
     row: {
+        alignItems: "center",
+        flex: 1,
         flexDirection: "row",
+
     },
     header: {
+        flex: 10,
         fontSize: 25,
         fontWeight: "700",
         alignItems: "flex-start"

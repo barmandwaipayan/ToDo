@@ -5,9 +5,8 @@ import PropTypes from 'prop-types';
 export default class AddTask extends Component {
   render() {
     return (
-      <View >
-        <TouchableOpacity 
-          style={styles.addTaskButton}
+      <View style={styles.addTaskButton}>
+        <TouchableOpacity
           onPress={ () => {
                 t1 = new Date()
                 t1.setHours(1)
@@ -29,9 +28,10 @@ export default class AddTask extends Component {
 
 styles = StyleSheet.create({
   addTaskButton: {
-    height: 5,
-    width: 5,
-    margin: 5,
+    flex: 1,
+    height: 20,
+    width: 20,
+    marginHorizontal: 10,    
   },
   buttonText: {
     color: "rgb(31, 129, 255)",

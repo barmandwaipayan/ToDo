@@ -58,15 +58,19 @@ const styles = StyleSheet.create({
     },
     todoItem: {
       flexDirection: "row",
+      margin: "auto",
+      paddingHorizontal: 20,
     },
     time: {
       color: 'green',
     },
     txt:{
+      width: 150,
       color: 'rgb(148, 163, 166)',
       margin: 5,
     },
     txtCompleted:{
+      width: 150,
       color: 'rgb(186, 204, 217)',
       margin: 5,
       textDecorationLine: "line-through",

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Alert,Text, View, CheckBox, StyleSheet} from 'react-native';
+import { Alert,Text, View, CheckBox, StyleSheet, Dimensions} from 'react-native';
 import Scroll from './HorizontalScroll';
 import HeaderGroup from "./HeaderGroup"
 import uuidv4 from 'uuid'
@@ -165,20 +165,34 @@ export default class TaskGroupList extends Component {
     }
 
     render() {
+        // alert(styles.taskHorizontalScroll.flex)
+        var {height, width} = Dimensions.get('window');
         return (
             <View style={styles.taskHorizontalScroll}>
-                <HeaderGroup addTaskGroup={this.addTaskGroup} />
-                <Scroll taskGroups = {this.state.taskGroups}
-                toggleStatus={this.toggleStatus}
-                addTask={this.addTask}
-                />
+                <View style={{flex: 1, width: width, paddingHorizontal: 30 }}>
+                    <HeaderGroup style={styles.headerTaskGroup} addTaskGroup={this.addTaskGroup} />
+                </View>
+                <View style={{flex: 9}}>
+                    <Scroll taskGroups = {this.state.taskGroups}
+                    toggleStatus={this.toggleStatus}
+                    addTask={this.addTask}
+                    style={styles.scroll}
+                    />
+                </View>
+                {/* <Text style={styles.scroll}>test</Text> */}
             </View>
         )
     }
 }
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
     taskHorizontalScroll: {
         flex: 1,
-    }
+        // alignContent: "flex-start",
+        // justifyContent: "flex-start",
+    },
+    headerTaskGroup: {
+    },
+    scroll: {
+    },
 })
