@@ -10,25 +10,22 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import TaskGroupList from './components/TaskGroupList';
 import AnalogClock from "./components/AnalogClock";
-import AddTaskModal from "./components/AddTaskModal"
-import DateTimePickerTester from "./components/TimePicker"
+import AddTaskGroupModal from "./components/AddTaskGroupModal"
 
 export default class App extends Component {
   render() {
     return (
-        // <AddTaskModal />
-        // <AddTaskModal />
+      // <AddTaskGroupModal visible={false}/>
         <View style={styles.app} >
-          <View style ={{flex: 2}}></View>
+          <View style ={{flex: 1}}></View>
           {/* <View style={[styles.container, {flex: 5} ]}>
           </View> */}
-          <View>
-            <AnalogClock />
+          <View style={{flex: 5,}}>
           </View>
           <View style={[styles.container, {flex: 7} ]}>
             <TaskGroupList />
           </View>
-        </View  >
+        </View>
     );
   }
 }

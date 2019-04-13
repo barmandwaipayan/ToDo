@@ -8,15 +8,9 @@ export default class AddTask extends Component {
       <View style={styles.addTaskButton}>
         <TouchableOpacity
           onPress={ () => {
-                t1 = new Date()
-                t1.setHours(1)
-                t1.setMinutes(11)
-        
-                t2 = new Date()
-                t2.setHours(2)
-                t2.setMinutes(22)
-                
-                this.props.addTask(this.props.id, 'test', t1, t2, false)
+                this.props.toggleModalVisibility(true);
+                this.props.setSelectedGroup(this.props.id);
+                // this.props.addTask(this.props.id, 'test', t1, t2, false)
             }
         }>
           <Text style={styles.buttonText}>+</Text>
@@ -42,4 +36,5 @@ styles = StyleSheet.create({
 
 AddTask.propTypes = {
     addTask: PropTypes.func,
+    id: PropTypes.string,
   };

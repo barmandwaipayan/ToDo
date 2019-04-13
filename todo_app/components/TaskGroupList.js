@@ -3,6 +3,8 @@ import { Alert,Text, View, CheckBox, StyleSheet, Dimensions} from 'react-native'
 import Scroll from './HorizontalScroll';
 import HeaderGroup from "./HeaderGroup"
 import uuidv4 from 'uuid'
+import AddTaskModal from "./AddTaskModal"
+import AddTaskGroupModal from "./AddTaskGroupModal"
 
 export default class TaskGroupList extends Component {
     constructor(props){
@@ -29,6 +31,9 @@ export default class TaskGroupList extends Component {
         t5.setMinutes(55)
 
         this.state = {
+            addTaskModalVisible: false,
+            addTaskGroupModalVisible: false,
+            selectedGroup: null,
             taskGroups: [
                 {
                     title: "task group 1",
@@ -57,52 +62,6 @@ export default class TaskGroupList extends Component {
                         }
                     ]
                 },
-                // {
-                //     title: "task group 2",
-                //     taskList: [
-                //         {
-                //             activity: "fest",
-                //             from: "11:11",
-                //             to: "12:00",
-                //             completed: false,
-                //         },
-                //         {
-                //             activity: "fest1",
-                //             from: "1:11",
-                //             to: "2:00",
-                //             completed: false,
-                //         },
-                //         {
-                //             activity: "fest2",
-                //             from: "1:44",
-                //             to: "3:30",
-                //             completed: true,
-                //         }
-                //     ]
-                // },
-                // {
-                //     title: "task group 3",
-                //     taskList: [
-                //         {
-                //             activity: "test",
-                //             from: "11:11",
-                //             to: "12:00",
-                //             completed: true,
-                //         },
-                //         {
-                //             activity: "test1",
-                //             from: "1:11",
-                //             to: "2:00",
-                //             completed: false,
-                //         },
-                //         {
-                //             activity: "test2",
-                //             from: "1:44",
-                //             to: "3:30",
-                //             completed: false,
-                //         }
-                //     ]
-                // }
             ],
             
         },
@@ -110,6 +69,19 @@ export default class TaskGroupList extends Component {
         this.helpIdGenerator = this.helpIdGenerator.bind(this);
         this.addTask = this.addTask.bind(this);
         this.addTaskGroup = this.addTaskGroup.bind(this);
+        this.toggleModalVisibility = this.toggleModalVisibility.bind(this);
+    }
+
+    toggleModalVisibility = (visible) => {   
+        this.setState({
+            addTaskModalVisible: visible,
+        })
+    }
+
+    toggleGroupModalVisibility = (visible) => {   
+        this.setState({
+            addTaskGroupModalVisible: visible,
+        })
     }
 
     toggleStatus = (id) => {
@@ -126,7 +98,7 @@ export default class TaskGroupList extends Component {
         })
     }
 
-    addTask = (id, activity, from, to, completed) => {
+    addTask = (id, activity, from, to, description, completed) => {
         var taskGroupsTemp = [...this.state.taskGroups]
         for(var i=0; i < taskGroupsTemp.length; i++) {
             if(taskGroupsTemp[i].id == id) {
@@ -134,6 +106,7 @@ export default class TaskGroupList extends Component {
                         activity,
                         from,
                         to,
+                        description,
                         completed,
                         id: uuidv4(),
                 });
@@ -149,14 +122,14 @@ export default class TaskGroupList extends Component {
     addTaskGroup = (title) => {
         var taskGroupsTemp = [...this.state.taskGroups]
         taskGroupsTemp.push({
-            title,
+            title: title,
             id: uuidv4(),
             taskList: []
         }
         )
         this.setState({
             taskGroups: taskGroupsTemp,
-        })  
+        })
     }
 
     helpIdGenerator = () => {
@@ -164,22 +137,40 @@ export default class TaskGroupList extends Component {
         return uuidv4
     }
 
+    setSelectedGroup = (id) => {
+        this.setState({
+            selectedGroup: id,
+        })
+    }
+
     render() {
-        // alert(styles.taskHorizontalScroll.flex)
         var {height, width} = Dimensions.get('window');
         return (
             <View style={styles.taskHorizontalScroll}>
+                <AddTaskModal
+                    visible={this.state.addTaskModalVisible}
+                    toggleModalVisibility={this.toggleModalVisibility}
+                    addTask={this.addTask}
+                    selectedGroup={this.state.selectedGroup}
+                />
+                <AddTaskGroupModal
+                    visible={this.state.addTaskGroupModalVisible}
+                    toggleGroupModalVisibility={this.toggleGroupModalVisibility}
+                    addTaskGroup={this.addTaskGroup}
+                />
                 <View style={{flex: 1, width: width, paddingHorizontal: 30 }}>
-                    <HeaderGroup style={styles.headerTaskGroup} addTaskGroup={this.addTaskGroup} />
+                    <HeaderGroup style={styles.headerTaskGroup} 
+                    addTaskGroup={this.addTaskGroup}
+                    />
                 </View>
                 <View style={{flex: 9}}>
                     <Scroll taskGroups = {this.state.taskGroups}
                     toggleStatus={this.toggleStatus}
-                    addTask={this.addTask}
                     style={styles.scroll}
+                    toggleModalVisibility={this.toggleModalVisibility}
+                    setSelectedGroup={this.setSelectedGroup}
                     />
                 </View>
-                {/* <Text style={styles.scroll}>test</Text> */}
             </View>
         )
     }

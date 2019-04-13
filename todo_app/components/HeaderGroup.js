@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 export default class HeaderGroup extends Component {
   render() {
-      
     return (
         <View style={styles.row}>
             <Text style={styles.header}>Tasks List</Text>

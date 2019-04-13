@@ -25,15 +25,15 @@ export default class TaskGroup extends Component {
                         <TaskGroupTitle header={this.props.taskGroup.title} />
                     </View>
                     <View style={{flex:1,}}>
-                        <AddTask addTask={this.props.addTask} id={this.props.id} />
+                        <AddTask addTask={this.props.addTask} id={this.props.id} 
+                        toggleModalVisibility={this.props.toggleModalVisibility}
+                        setSelectedGroup={this.props.setSelectedGroup}
+                        />
                     </View>
                 </View>
                 <View style={{flex:6,}}>
                     <TouchableWithoutFeedback>
-                        <ScrollView bounces={true}
-                            indicatorStyle={"white"}
-                            bouncesZoom = {true}
-                        >
+                        <ScrollView>
                             {rows}
                         </ScrollView>
                     </TouchableWithoutFeedback>
@@ -50,8 +50,7 @@ const styles = StyleSheet.create({
     headRow: {
         flex: 1,
         flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
+        alignItems: "stretch",
         padding: 20,
     }
 })
@@ -60,4 +59,6 @@ TaskGroup.propTypes = {
     addTask: PropTypes.func,
     taskGroup: PropTypes.object,
     toggleStatus: PropTypes.func,
+    toggleModalVisibility: PropTypes.func,
+    setSelectedGroup: PropTypes.func,
   };

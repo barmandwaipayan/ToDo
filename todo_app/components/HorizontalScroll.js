@@ -39,6 +39,8 @@ export default class Scroll extends Component {
                     toggleStatus={this.props.toggleStatus}
                     addTask={this.props.addTask}
                     id={data.id}
+                    toggleModalVisibility={this.props.toggleModalVisibility}
+                    setSelectedGroup={this.props.setSelectedGroup}
                     />
                 </TouchableOpacity>
             )
@@ -53,6 +55,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   view: {
+    flex: 1,
     width: 260,
     backgroundColor: "#fff",
     borderRadius: 30,
@@ -70,4 +73,6 @@ Scroll.propTypes = {
   addTask: PropTypes.func,
   taskGroups: PropTypes.array,
   toggleStatus: PropTypes.func,
+  toggleModalVisibility: PropTypes.func,
+  setSelectedGroup: PropTypes.func,
 };

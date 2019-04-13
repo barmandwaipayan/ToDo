@@ -1,24 +1,48 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, TextInput, Modal, Text, TouchableHighlight, View, StyleSheet} from "react-native"
 import DateTimePicker from 'react-native-modal-datetime-picker';
+import PropTypes from 'prop-types';
 
-class AddtaskModal extends Component {
+class AddTaskModal extends Component {
     constructor(props) {
         super(props)
         var from = new Date();
         var to = new Date();
         this.state = {
-            modalVisible: false,
+            modalVisible: this.props.visible,
             activity: "",
             from: from,
             to: to,
             description: "",
             isFromDateTimePickerVisible: false,
             isToDateTimePickerVisible: false,
-            nameError: null,
+            activityError: null,
         };
     }
- 
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+    // do things with nextProps.someProp and prevState.cachedSomeProp
+        if(nextProps.visible !== prevState.modalVisible){
+            return {
+                modalVisible: nextProps.visible,
+            }
+        }
+        return null
+    }
+    
+    _reset = () => {
+        var from = new Date();
+        var to = new Date();
+        this.setState({
+            activity: "",
+            from: from,
+            to: to,
+            description: "",
+            isFromDateTimePickerVisible: false,
+            isToDateTimePickerVisible: false,
+            activityError: null,
+        })
+    }
     _showFromDateTimePicker = () => this.setState({ isFromDateTimePickerVisible: true });
 
     _hideFromDateTimePicker = () => this.setState({ isFromDateTimePickerVisible: false });
@@ -28,7 +52,6 @@ class AddtaskModal extends Component {
     _hideToDateTimePicker = () => this.setState({ isToDateTimePickerVisible: false });
 
     _handleDatePickedFrom = (date) => {
-        console.log('A date has been picked: ', date);
         this.setState({
             from: date,
             to: date,
@@ -37,7 +60,6 @@ class AddtaskModal extends Component {
     }
 
     _handleDatePickedTo = (date) => {
-        console.log('A date has been picked: ', date);
         this.setState({
             to: date,
         })
@@ -46,107 +68,113 @@ class AddtaskModal extends Component {
 
     toggleModal(visible) {
         this.setState({ modalVisible: visible });
+        this.props.toggleModalVisibility(visible);
     }
    render() {
       return (
         <View style={{flex:1,}}>
-            <View style = {styles.container}>
-                <Modal animationType = {"slide"} transparent = {false}
-                visible = {this.state.modalVisible}
-                onRequestClose = {() => { console.log("Modal has been closed.") } }>
-                
-                <View style = {styles.modal}>
-                    <DateTimePicker
-                        mode={"time"}
-                        isVisible={this.state.isFromDateTimePickerVisible}
-                        onConfirm={this._handleDatePickedFrom}
-                        onCancel={this._hideFromDateTimePicker}
-                    />
-                    <DateTimePicker
-                        mode={"time"}
-                        isVisible={this.state.isToDateTimePickerVisible}
-                        onConfirm={this._handleDatePickedTo}
-                        onCancel={this._hideToDateTimePicker}
-                    />
-
-                    <TextInput
-                            style={styles.activityName}
-                            onChangeText={(text) => this.setState({activity: text})}
-                            value={this.state.activity}
-                            placeholder={"Enter the task"}
+            <Modal animationType = {"slide"}
+            transparent = {true}
+            visible = {this.props.visible}
+            onRequestClose = {() => { this._reset();
+                this.toggleModal(!this.state.modalVisible) } }>
+                <View style={{flex:1, backgroundColor: "rgba(0,0,0,0.5)",}}>
+                    <View style = {styles.modal}>
+                        <DateTimePicker
+                            mode={"time"}
+                            isVisible={this.state.isFromDateTimePickerVisible}
+                            onConfirm={this._handleDatePickedFrom}
+                            onCancel={this._hideFromDateTimePicker}
                         />
-                    
-                    <TouchableOpacity onPress={this._showFromDateTimePicker} style={styles.activityName}>
-                        <Text>From: {this.state.from.getHours()} : {this.state.from.getMinutes()} </Text>
-                    </TouchableOpacity>
+                        <DateTimePicker
+                            mode={"time"}
+                            isVisible={this.state.isToDateTimePickerVisible}
+                            onConfirm={this._handleDatePickedTo}
+                            onCancel={this._hideToDateTimePicker}
+                        />
 
-                    <TouchableOpacity onPress={this._showToDateTimePicker} style={styles.activityName}>
-                        <Text>To: {this.state.to.getHours()} : {this.state.to.getMinutes()} </Text>
-                    </TouchableOpacity>
-
-                    <TextInput
-                            style={styles.activityName}
-                            onChangeText={(text) => this.setState({description: text})}
-                            value={this.state.description}
-                            placeholder={"Enter the description"}
-                    />
-                    {!!this.state.nameError && (
-                            <Text style={{ color: "red" }}>{this.state.nameError}</Text>
-                          )}
+                        <TextInput
+                                style={styles.activityName}
+                                onChangeText={(text) => this.setState({activity: text})}
+                                value={this.state.activity}
+                                placeholder={"Enter the task"}
+                            />
                         
-                    <View style={{flexDirection: "row", justifyContents: "center",}}>
-                        <TouchableHighlight 
-                        style={styles.cancelButton}
-                        onPress = {() => {
-                            this.toggleModal(!this.state.modalVisible)}}>
+                        <TouchableOpacity onPress={this._showFromDateTimePicker} style={styles.activityName}>
+                            <Text>From: {this.state.from.getHours()} : {this.state.from.getMinutes()} </Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={this._showToDateTimePicker} style={styles.activityName}>
+                            <Text>To: {this.state.to.getHours()} : {this.state.to.getMinutes()} </Text>
+                        </TouchableOpacity>
+
+                        <TextInput
+                                style={styles.activityName}
+                                onChangeText={(text) => this.setState({description: text})}
+                                value={this.state.description}
+                                placeholder={"Enter the description"}
+                        />
+                        {!!this.state.activityError && (
+                                <Text style={{ color: "red" }}>{this.state.activityError}</Text>
+                                )}
                             
-                            <Text style = {styles.text}>Cancel</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight
-                            style={styles.addTaskButton}
+                        <View style={{flexDirection: "row", justifyContents: "center",}}>
+                            <TouchableHighlight 
+                            style={styles.cancelButton}
                             onPress = {() => {
-                                if (this.state.activity.trim() === "") {
-                                    var add = false;
-                                    this.setState(() => ({ nameError: "First name required." }));
-                                    } else {
-                                    this.setState(() => ({ nameError: null }));
-                                    add = true;
+                                this._reset();
+                                this.toggleModal(!this.state.modalVisible)}}>
+                                
+                                <Text style = {styles.text}>Cancel</Text>
+                            </TouchableHighlight>
+                            <TouchableHighlight
+                                style={styles.addTaskButton}
+                                onPress = {() => {
+                                    if (this.state.activity.trim() === "") {
+                                        var add = false;
+                                        this.setState(() => ({ activityError: "Activity name required." }));
+                                        } else {
+                                        this.setState(() => ({ activityError: null }));
+                                        add = true;
+                                        }
+                                    if(add===true) {
+                                        console.log(this.state.activityError)
+                                        this.props.addTask(
+                                            this.props.selectedGroup,
+                                            this.state.activity,
+                                            this.state.from,
+                                            this.state.to,
+                                            this.state.description,
+                                            false,
+                                        )
+                                        this._reset();
+                                        this.toggleModal(!this.state.modalVisible)
                                     }
-                                if(add===true) {
-                                    console.log(this.state.nameError)
-                                    this.toggleModal(!this.state.modalVisible)
-                                }
-                        }}>
-                            
-                            <Text style = {[styles.text, {color: "white"}]}>Add</Text>
-                        </TouchableHighlight>
+                            }}>
+                                
+                                <Text style = {[styles.text, {color: "white"}]}>Add</Text>
+                            </TouchableHighlight>
+                        </View>
                     </View>
                 </View>
-                </Modal>
-                
-                <TouchableHighlight onPress = {() => {this.toggleModal(true)}}>
-                <Text style = {styles.text}>Open Modal</Text>
-                </TouchableHighlight>
-            </View>
+            </Modal>
         </View>
       )
    }
 }
-export default AddtaskModal
+export default AddTaskModal
 
 const styles = StyleSheet.create ({
    container: {
-    flex: 1,
       alignItems: 'center',
       backgroundColor: "rgb(237,241,244)",
       padding: 100
    },
    modal: {
-      flex: 1,
       alignItems: 'center',
-      backgroundColor: "rgb(237,241,244)",
-      padding: 100,
-      margin: 20,
+      backgroundColor: "#fff",
+      padding: 30,
+      margin: 30,
       borderRadius: 20,
    },
    text: {
@@ -181,3 +209,10 @@ const styles = StyleSheet.create ({
     alignItems: "center",
    }
 })
+
+AddTaskModal.propTypes = {
+    id: PropTypes.string,
+    visible: PropTypes.bool,
+    addTask: PropTypes.func,
+    selectedGroup: PropTypes.string,
+  };
