@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { Text, View, CheckBox, StyleSheet} from 'react-native';
+import { Text, View, CheckBox, StyleSheet, Dimensions} from 'react-native';
 import PropTypes from 'prop-types';
 
-export default class TodoItem extends React.Component {
+const {height, width} = Dimensions.get("window")
+
+export default class TodoItemExp extends React.Component {
   render(){
     if (this.props.to.getHours() != this.props.from.getHours() || 
     this.props.to.getMinutes() != this.props.from.getMinutes()){
       return(
         <View style={styles.todoItem}> 
             <CheckBox
-            uncheckedColor="pink"
               containerStyle={styles.checkBox}
               style={styles.checkBox}
               value={this.props.completed}
@@ -18,12 +19,13 @@ export default class TodoItem extends React.Component {
                 }
               } 
             />
-            <Text numberOfLines={1} ellipsizeMode='tail' style={ (this.props.completed) ? styles.txtCompleted : styles.txt }>    
+            <Text style={ [(this.props.completed) ? styles.txtCompleted : styles.txt,
+               {fontSize: width * 0.05,}]}>    
                 <Text>{ this.props.activity}</Text>
                 <Text> from </Text>
                 <Text style={styles.time}> { this.props.from.getHours() } : { this.props.from.getMinutes() } </Text>
                 <Text> to </Text>
-                <Text style={styles.time}> { this.props.to.getHours() } : { this.props.to.getMinutes() } </Text>
+                <Text> { this.props.to.getHours() } : { this.props.to.getMinutes() } </Text>
             </Text>
         </View> 
       )
@@ -32,7 +34,6 @@ export default class TodoItem extends React.Component {
       return(
         <View style={styles.todoItem} >
           <CheckBox
-          uncheckedColor="pink"
             containerStyle={styles.checkBox}
             style={styles.checkBox}
             value={this.props.completed}
@@ -41,10 +42,11 @@ export default class TodoItem extends React.Component {
               }
             } 
           />
-          <Text numberOfLines={1} ellipsizeMode='tail' style={ (this.props.completed)? styles.txtCompleted : styles.txt }>
+          <Text style={[ (this.props.completed)? ((this.props.index % 2 === 0) ? styles.txtCompleted1 : styles.txtCompleted2) : 
+            ((this.props.index % 2 === 0) ? styles.txt1 : styles.txt2), {fontSize: width * 0.05,} ]}>
             <Text>{this.props.activity}</Text>
             <Text> at </Text>
-            <Text style={styles.time}> { this.props.from.getHours() } : { this.props.from.getMinutes() } </Text>
+            <Text> { this.props.from.getHours() } : { this.props.from.getMinutes() } </Text>
           </Text>
         </View>
       )
@@ -58,21 +60,27 @@ const styles = StyleSheet.create({
     },
     todoItem: {
       flexDirection: "row",
-      margin: "auto",
-      paddingHorizontal: 20,
+      margin: 10,
+      paddingHorizontal: 30,
     },
-    time: {
-      color: 'green',
-    },
-    txt:{
-      width: 150,
+    txt1:{
       color: 'rgb(148, 163, 166)',
-      margin: 5,
+      marginHorizontal: 10,
     },
-    txtCompleted:{
-      width: 150,
+    txt2:{
+      color: '#fff',
+      marginHorizontal: 10,
+    },
+    txtCompleted1:{
       color: 'rgb(186, 204, 217)',
-      margin: 5,
+      marginHorizontal: 10,
+      textDecorationLine: "line-through",
+      textDecorationStyle: "solid",
+      textDecorationColor: "rgb(158, 188, 218)",
+    },
+    txtCompleted2:{
+      color: 'rgb(220, 226, 231)',
+      marginHorizontal: 10,
       textDecorationLine: "line-through",
       textDecorationStyle: "solid",
       textDecorationColor: "rgb(158, 188, 218)",
@@ -80,7 +88,7 @@ const styles = StyleSheet.create({
 }
 )
 
-TodoItem.propTypes = {
+TodoItemExp.propTypes = {
   from: PropTypes.object,
   to: PropTypes.object,
   id: PropTypes.string,

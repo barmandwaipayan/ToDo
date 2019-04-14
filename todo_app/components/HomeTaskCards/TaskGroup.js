@@ -16,18 +16,23 @@ export default class TaskGroup extends Component {
                 completed={this.props.taskGroup.taskList[i].completed} 
                 id={this.props.taskGroup.taskList[i].id}
                 toggleStatus={this.props.toggleStatus}
+                index={this.props.index}
                 />);
         }
         return (
-            <View style={styles.taskGroup}>
+            <View style={ (this.props.index % 2 === 0 )? styles.taskGroup1 : styles.taskGroup2 }>
                 <View style={styles.headRow}>
                     <View style={{flex:3,}}>
-                        <TaskGroupTitle header={this.props.taskGroup.title} />
+                        <TaskGroupTitle header={this.props.taskGroup.title} 
+                            index={this.props.index} />
                     </View>
                     <View style={{flex:1,}}>
-                        <AddTask addTask={this.props.addTask} id={this.props.id} 
+                        <AddTask
+                        addTask={this.props.addTask}
+                        id={this.props.id} 
                         toggleModalVisibility={this.props.toggleModalVisibility}
                         setSelectedGroup={this.props.setSelectedGroup}
+                        index={this.props.index}
                         />
                     </View>
                 </View>
@@ -44,15 +49,28 @@ export default class TaskGroup extends Component {
 }
 
 const styles = StyleSheet.create({
-    taskGroup: {
-        margin: "auto",
+    taskGroup1: {
+        flex: 1,
+        width: 220,
+        backgroundColor: "#fff",
+        borderRadius: 30,
+        margin: 20,
+        marginBottom: 30,
+    },
+    taskGroup2: {
+        flex: 1,
+        width: 220,
+        backgroundColor: "rgba(31, 128, 253, 0.7)",
+        borderRadius: 30,
+        margin: 20,
+        marginBottom: 30,
     },
     headRow: {
         flex: 1,
         flexDirection: "row",
         alignItems: "stretch",
         padding: 20,
-    }
+    },
 })
 
 TaskGroup.propTypes = {

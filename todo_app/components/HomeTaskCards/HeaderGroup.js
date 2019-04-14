@@ -6,14 +6,16 @@ export default class HeaderGroup extends Component {
   render() {
     return (
         <View style={styles.row}>
-            <Text style={styles.header}>Tasks List</Text>
-            <TouchableOpacity style={styles.addButton}
+            <Text style={styles.header}>Tasks Lists</Text>
+            <TouchableOpacity style={{flex: 3}}
                 onPress={ () => {
-                    this.props.addTaskGroup('test')
+                    this.props.toggleGroupModalVisibility(true);
                     }
                 }
                 >
-                <Text>+</Text>
+                <View style={styles.addButton}>
+                    <Text style={styles.plus}>+</Text>
+                </View>
             </TouchableOpacity>
         </View>
     )
@@ -21,15 +23,19 @@ export default class HeaderGroup extends Component {
 }
 
 const styles=StyleSheet.create({
+    plus: {
+        color: "#fff",
+        fontSize: 16,
+    },
     addButton: {
         flex: 1,
         backgroundColor: "rgb(251, 45, 75)",
         margin: "auto",
         borderRadius: 5,
-        width: 20,
+        width: 30,
         height: 30,
         alignItems: "center",
-        paddingTop: 5,
+        justifyContent: "center",
     },
     row: {
         alignItems: "center",
@@ -46,5 +52,5 @@ const styles=StyleSheet.create({
 })
 
 HeaderGroup.propTypes = {
-    addTaskgroup: PropTypes.func,
+    toggleGroupModalVisibility: PropTypes.func,
   };

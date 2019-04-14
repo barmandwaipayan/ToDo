@@ -3,7 +3,6 @@ import { View, StyleSheet, ScrollView, Dimensions, TouchableOpacity } from 'reac
 import TaskGroup from './TaskGroup';
 import PropTypes from 'prop-types';
 
-const { width } = Dimensions.get('window') ;
 
 export default class Scroll extends Component {
 
@@ -19,20 +18,22 @@ export default class Scroll extends Component {
         pagingEnabled={true}
         horizontal= {true}
         decelerationRate={0}
-        snapToInterval={width - 60}
+        snapToInterval={260}
         snapToAlignment={"center"}
         contentInset={{
           top: 0,
           left: 30,
           bottom: 0,
           right: 30,
-        }}>
+        }}
+        >
 
         {this.props.taskGroups.map((data, index) => {
             return(
-                <TouchableOpacity style={styles.view}
+                <TouchableOpacity
                 key={data.id}
                 activeOpacity={0.9}
+                onPress={() => this.props.navigation.navigate('Expanded')}
                 >
                     <TaskGroup 
                     taskGroup={data}
@@ -41,6 +42,7 @@ export default class Scroll extends Component {
                     id={data.id}
                     toggleModalVisibility={this.props.toggleModalVisibility}
                     setSelectedGroup={this.props.setSelectedGroup}
+                    index={index}
                     />
                 </TouchableOpacity>
             )
@@ -53,19 +55,6 @@ export default class Scroll extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  view: {
-    flex: 1,
-    width: 260,
-    backgroundColor: "#fff",
-    borderRadius: 30,
-    margin: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 1,
-    shadowRadius: 2,
-    elevation: 1,
-    alignItems: "flex-start"
   },
 });
 

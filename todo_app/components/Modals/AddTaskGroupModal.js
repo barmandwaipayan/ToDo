@@ -35,7 +35,7 @@ class AddTaskGroupModal extends Component {
     }
    render() {
       return (
-        <View style={{flex:1,}}>
+        <View>
             <Modal animationType = {"slide"}
             transparent = {true}
             visible = {this.props.visible}
@@ -46,8 +46,8 @@ class AddTaskGroupModal extends Component {
 
                         <TextInput
                                 style={styles.groupName}
-                                onChangeText={(text) => this.setState({activity: text})}
-                                value={this.state.activity}
+                                onChangeText={(text) => this.setState({name: text})}
+                                value={this.state.name}
                                 placeholder={"Enter the ToDo list name"}
                             />
      
@@ -67,8 +67,8 @@ class AddTaskGroupModal extends Component {
                             <TouchableHighlight
                                 style={styles.addTaskButton}
                                 onPress = {() => {
-                                    if (this.state.activity.trim() === "") {
-                                        var add = false;
+                                    var add = false;
+                                    if (this.state.name.trim() === "") {
                                         this.setState(() => ({ nameError: "ToDo list name required." }));
                                         } else {
                                         this.setState(() => ({ nameError: null }));

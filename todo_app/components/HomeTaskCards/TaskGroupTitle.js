@@ -6,15 +6,22 @@ export default class TaskGroupTitle extends Component {
   render() {
     return (
         <View>
-            <Text style={styles.header}>{this.props.header}</Text>
+            <Text style={(this.props.index % 2 === 0) ? styles.header1 : styles.header2}>{this.props.header}</Text>
         </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-    header: {
-        fontSize: 20,
+    header1: {
+        fontSize: 16,
+        fontWeight: "bold",
+        color: "rgb(78, 106, 133)",
+    },
+    header2: {
+      fontSize: 16,
+      fontWeight: "bold",
+      color: "#fff"
     }
 })
 

@@ -72,7 +72,7 @@ class AddTaskModal extends Component {
     }
    render() {
       return (
-        <View style={{flex:1,}}>
+        <View>
             <Modal animationType = {"slide"}
             transparent = {true}
             visible = {this.props.visible}
