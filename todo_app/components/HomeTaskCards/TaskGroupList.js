@@ -46,10 +46,6 @@ const styles = StyleSheet.create({
     taskHorizontalScroll: {
         flex: 1,
     },
-    headerTaskGroup: {
-    },
-    scroll: {
-    },
 })
 
 TaskGroupList.propTypes = {

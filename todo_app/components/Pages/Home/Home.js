@@ -4,16 +4,18 @@ import TaskGroupList from '../../HomeTaskCards/TaskGroupList';
 import PropTypes from 'prop-types';
 import uuidv4 from "uuid"
 import { connect } from "react-redux"
+import { bindActionCreators } from 'redux';
+import { addTask as addTaskStore } from "../../../actions/addTask"
+import { addGroup as addTaskGroupStore } from "../../../actions/addTaskGroup"
+import { complete } from "../../../actions/complete"
+import { taskModal } from "../../../actions/taskModal"
+import { groupModal } from "../../../actions/groupModal"
 
 class Home extends Component {
   constructor(props){
     super(props);
     this.state = this.props.global
     this.toggleStatus = this.toggleStatus.bind(this);
-    this.helpIdGenerator = this.helpIdGenerator.bind(this);
-    this.addTask = this.addTask.bind(this);
-    this.addTaskGroup = this.addTaskGroup.bind(this);
-    this.toggleModalVisibility = this.toggleModalVisibility.bind(this);
 }
 
 toggleModalVisibility = (visible) => {   
@@ -29,56 +31,49 @@ toggleGroupModalVisibility = (visible) => {
 }
 
 toggleStatus = (id) => {
-    this.setState({
-        taskGroups: this.state.taskGroups.map( data => {
-            data.taskList.map( task => {
-                if(task.id == id) {
-                    task.completed = !task.completed;
-                }
-                return(task)
-            })
-            return(data);
-        })
-    })
+    this.props.complete(id)
 }
 
 addTask = (id, activity, from, to, description, completed) => {
     var taskGroupsTemp = [...this.state.taskGroups]
     for(var i=0; i < taskGroupsTemp.length; i++) {
         if(taskGroupsTemp[i].id == id) {
-            taskGroupsTemp[i].taskList.push({
-                    activity,
-                    from,
-                    to,
-                    description,
-                    completed,
-                    id: uuidv4(),
-            });
+            var tempObj = {
+              activity,
+              from,
+              to,
+              description,
+              completed,
+              id: uuidv4(),
+            } 
+            taskGroupsTemp[i].taskList.push(tempObj);
+            this.props.addTaskStore(tempObj.activity, tempObj.from, tempObj.to, tempObj.description, tempObj.completed, tempObj.id);
             break;
         }
     }
     this.setState({
         taskGroups: taskGroupsTemp,
     })
-    
+    this.props.taskModal(false);
 }
 
 addTaskGroup = (title) => {
     var taskGroupsTemp = [...this.state.taskGroups]
-    taskGroupsTemp.push({
-        title: title,
-        id: uuidv4(),
-        taskList: []
+
+    var tempObj = {
+      title: title,
+      id: uuidv4(),
+      taskList: []
     }
-    )
+    taskGroupsTemp.push(tempObj)
+
+    this.props.addTaskGroupStore(tempObj)
+
     this.setState({
         taskGroups: taskGroupsTemp,
     })
-}
 
-helpIdGenerator = () => {
-    const uuidv4 = require('uuid/v4')
-    return uuidv4
+    this.props.groupModal(false);
 }
 
 setSelectedGroup = (id) => {
@@ -87,6 +82,7 @@ setSelectedGroup = (id) => {
     })
 }
     render() {
+      // console.log(this.props.addTaskStore)
       return (
         <View style={{flex: 1,}}>
           <View style={styles.app} >
@@ -95,7 +91,7 @@ setSelectedGroup = (id) => {
             </View> */}
             <View style={{flex: 5,}}>
             </View>
-            <View style={[styles.container, {flex: 9} ]}>
+            <View style={[styles.container, {flex: 7} ]}>
               <TaskGroupList
                 navigate={this.props.navigation.navigate}
                 setSelectedGroup={this.setSelectedGroup}
@@ -142,10 +138,19 @@ setSelectedGroup = (id) => {
     addTaskGroupModalVisible: PropTypes.bool,
   };
 
-  const mapStateToProps = state => {
-    return {
-        global: state
-    };
+const mapStateToProps = state => {
+  return {
+      global: state
   };
+};
   
-  export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    addTaskStore,
+    addTaskGroupStore,
+    complete,
+    taskModal,
+    groupModal,
+  }, dispatch)
+);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 export default class AddTaskToCard extends Component {
   render() {
     return (
-      <View style={styles.addTaskButton}>
+      <View style={styles.addTaskButtonExpanded}>
         <TouchableOpacity
           onPress={ () => {
               this.props.toggleModalVisibility(true);
               this.props.setSelectedGroup(this.props.id);
             }
         }>
-          <Text style={(this.props.index % 2 === 0) ? styles.buttonText1 : styles.buttonText2}>+</Text>
+          <Text style={(this.props.index % 2 === 0) ? styles.buttonExpandedText1 : styles.buttonExpandedText2}>+</Text>
         </TouchableOpacity>
       </View>
     )
@@ -20,17 +20,17 @@ export default class AddTaskToCard extends Component {
 }
 
 styles = StyleSheet.create({
-  addTaskButton: {
+  addTaskButtonExpanded: {
     flex: 1,
     height: 40,
     width: 40,
     justifyContent: "center",  
   },
-  buttonText1: {
+  buttonExpandedText1: {
     color: "rgba(31, 129, 255, 0.9)",
     fontSize: 40,
   },
-  buttonText2: {
+  buttonExpandedText2: {
     color: "#fff",
     fontSize: 40,
   }

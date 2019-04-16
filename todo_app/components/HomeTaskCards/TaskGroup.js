@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         margin: 20,
         marginBottom: 30,
+        justifyContent: "center",
     },
     taskGroup2: {
         flex: 1,
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         alignItems: "stretch",
-        padding: 20,
+        padding: 30,
     },
 })
 

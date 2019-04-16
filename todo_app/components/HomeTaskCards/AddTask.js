@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TouchableOpacity, Text, View, CheckBox, StyleSheet, Button} from 'react-native';
+import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
 export default class AddTask extends Component {
@@ -12,7 +12,7 @@ export default class AddTask extends Component {
               this.props.setSelectedGroup(this.props.id);
               this.props.toggleModalVisibility(true);
             }
-        }>
+          }>
           <Text style={(this.props.index % 2 === 0) ? styles.buttonText1 : styles.buttonText2}>+</Text>
         </TouchableOpacity>
       </View>
@@ -23,8 +23,8 @@ export default class AddTask extends Component {
 styles = StyleSheet.create({
   addTaskButton: {
     flex: 1,
-    height: 20,
-    width: 20,
+    height: 30,
+    width: 30,
     marginHorizontal: 10,    
   },
   buttonText1: {

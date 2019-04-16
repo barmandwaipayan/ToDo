@@ -4,7 +4,6 @@ import Card from './Card';
 import PropTypes from 'prop-types';
 import AddTaskModal from '../Modals/AddTaskModal';
 
-
 export default class VerticalScroll extends Component {
   constructor (props) {
     super(props)
@@ -34,7 +33,7 @@ export default class VerticalScroll extends Component {
                 selectedGroup={this.props.selectedGroup}
             />
           <ScrollView
-            pagingEnabled={true}  
+            pagingEnabled={true}
           >
             {
               this.props.taskGroups.map((data, index) => {

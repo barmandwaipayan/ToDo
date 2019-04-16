@@ -11,19 +11,15 @@ const initialState = {
 const groupReducer = (state = initialState, action) => {
   switch(action.type) {
     case ADD_GROUP: {
-        var tempState = state;
-        tempState.taskGroups.push({
-            title: action.payload,
-            id: uuidv4(),
-            taskList: []
-        }
-        )
+        var tempState = [...state];
+        tempState.push(action.payload)
+        return(tempState)
     }
     case ADD_TASK: {
-        var tempState = state;
-        for(var i=0; i < tempState.taskGroups.length; i++) {
-            if(tempState.taskGroups[i].id == action.payload.id) {
-                tempState.taskGroups[i].taskList.push({
+        var tempState = [...state];
+        for(var i=0; i < tempState.length; i++) {
+            if(tempState[i].id == action.payload.id) {
+                tempState[i].taskList.push({
                     activity: action.payload.activity,
                     from: action.payload.from,
                     to: action.payload.to,
@@ -37,19 +33,19 @@ const groupReducer = (state = initialState, action) => {
         return(tempState)
     }
     case COMPLETE: {
-        var tempState = state;
+        var tempState = [...state];
         var i, j;
-        for(i = 0; i < tempState.taskGroups.length; i++) {
-            for(j = 0; j < tempState.taskGroups[i].taskList.length; j++){
-                if(tempState.taskGroups[i].taskList[j].id === action.payload){
-                  tempState.taskGroups[i].taskList[j].completed = !tempState.taskGroups[i].taskList[j].completed;
-                  return(tempState)
+        for(i = 0; i < tempState.length; i++) {
+            for(j = 0; j < tempState[i].taskList.length; j++){
+                if(tempState[i].taskList[j].id === action.payload){
+                    tempState[i].taskList[j].completed = !tempState[i].taskList[j].completed
+                    return(tempState)
                 }
             }
         }
-        return(tempState)
-    }
 
+        return(tempState)
+    }   
     default:
       return state;
   }

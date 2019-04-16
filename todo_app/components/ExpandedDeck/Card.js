@@ -23,13 +23,13 @@ export default class Card extends Component {
             index={this.props.index}
             />);
         }
-    console.log(this.props.height, this.props.width)
+    // console.log(this.props.height, this.props.width)
     return (
         // <View onLayout={(event) => { 
         //     console.warn(event.nativeEvent.layout)
         // }}
         <View style={{flex:1,}}>
-            <View style={ [(this.props.index % 2 === 0 )? styles.taskGroup1 : styles.taskGroup2, (this.props.height )? {borderTopRightRadius: this.props.width * 0.15, height: this.props.height} : {borderTopRightRadius: 70, height: 400} ] }>
+            <View style={ [(this.props.index % 2 === 0 )? styles.taskGroup1 : styles.taskGroup2, (this.props.height )? {borderTopRightRadius: this.props.width * 0.15, height: this.props.height} : {borderTopRightRadius: 70, height: 900} ] }>
                 <View style={styles.headRow}>
                     <View style={{flex:3,}}>
                         <CardHeader header={this.props.taskGroup.title} 

@@ -1,18 +1,36 @@
 import React, { Component } from 'react'
 import { View } from "react-native"
-import VerticalScroll from './VerticalScroll';
+import VerticalScroll from '../../ExpandedDeck/VerticalScroll';
 import { connect } from "react-redux"
+import uuidv4 from "uuid"
+import { bindActionCreators } from 'redux';
+import { addTask as addTaskStore } from "../../../actions/addTask"
+import { addGroup as addTaskGroupStore } from "../../../actions/addTaskGroup"
+import { complete } from "../../../actions/complete"
+import { taskModal } from "../../../actions/taskModal"
+import { groupModal } from "../../../actions/groupModal"
+import { BackHandler } from 'react-native';
 
 class ExpandedDeck extends Component {
     constructor(props){
         super(props);
         this.state = this.props.global
-        this.toggleStatus = this.toggleStatus.bind(this);
-        this.helpIdGenerator = this.helpIdGenerator.bind(this);
-        this.addTask = this.addTask.bind(this);
-        this.addTaskGroup = this.addTaskGroup.bind(this);
-        this.toggleModalVisibility = this.toggleModalVisibility.bind(this);
+        this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     }
+
+    componentWillMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+    
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+    
+    handleBackButtonClick() {
+        this.props.navigation.goBack(null);
+        return true;
+    }
+    
     toggleModalVisibility = (visible) => {   
         this.setState({
             addTaskModalVisible: visible,
@@ -26,38 +44,30 @@ class ExpandedDeck extends Component {
     }
     
     toggleStatus = (id) => {
-        this.setState({
-            taskGroups: this.state.taskGroups.map( data => {
-                data.taskList.map( task => {
-                    if(task.id == id) {
-                        task.completed = !task.completed;
-                    }
-                    return(task)
-                })
-                return(data);
-            })
-        })
+        this.props.complete(id)
     }
     
     addTask = (id, activity, from, to, description, completed) => {
         var taskGroupsTemp = [...this.state.taskGroups]
         for(var i=0; i < taskGroupsTemp.length; i++) {
             if(taskGroupsTemp[i].id == id) {
-                taskGroupsTemp[i].taskList.push({
-                        activity,
-                        from,
-                        to,
-                        description,
-                        completed,
-                        id: uuidv4(),
-                });
+                var tempObj = {
+                activity,
+                from,
+                to,
+                description,
+                completed,
+                id: uuidv4(),
+                } 
+                taskGroupsTemp[i].taskList.push(tempObj);
+                this.props.addTaskStore(tempObj.activity, tempObj.from, tempObj.to, tempObj.description, tempObj.completed, tempObj.id);
                 break;
             }
         }
         this.setState({
             taskGroups: taskGroupsTemp,
         })
-        
+        this.props.taskModal(false);
     }
     
     addTaskGroup = (title) => {
@@ -72,12 +82,7 @@ class ExpandedDeck extends Component {
             taskGroups: taskGroupsTemp,
         })
     }
-    
-    helpIdGenerator = () => {
-        const uuidv4 = require('uuid/v4')
-        return uuidv4
-    }
-    
+
     setSelectedGroup = (id) => {
         this.setState({
             selectedGroup: id,
@@ -85,6 +90,7 @@ class ExpandedDeck extends Component {
     }
 
   render() {
+    console.log(this.props.navigation.state.params.touchedIndex) 
     return (
       <View style={{flex:1,}}>
           <VerticalScroll 
@@ -107,4 +113,13 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(ExpandedDeck);
+const mapDispatchToProps = dispatch => (
+    bindActionCreators({
+      addTaskStore,
+      addTaskGroupStore,
+      complete,
+      taskModal,
+      groupModal,
+    }, dispatch)
+  );
+  export default connect(mapStateToProps, mapDispatchToProps)(ExpandedDeck);

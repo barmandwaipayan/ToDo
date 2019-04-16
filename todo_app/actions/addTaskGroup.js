@@ -1,8 +1,9 @@
 import { ADD_GROUP } from './types';
 
-export const addGroup = (title) => {
+export const addGroup = (taskGroup) => {
   return {
     type: ADD_GROUP,
-    payload: title
+    payload: taskGroup
+
   }
 }

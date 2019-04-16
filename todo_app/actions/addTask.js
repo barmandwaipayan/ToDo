@@ -1,14 +1,15 @@
 import { ADD_TASK } from './types';
 
-export const addTask = (id, activity, from, to, completed) => {
+export const addTask = (activity, from,to, description, completed, id) => {
   return {
     type: ADD_TASK,
     payload: {
-      id,
       activity,
       from,
       to,
-      completed
+      description,
+      completed,
+      id,
     }
   }
 }
