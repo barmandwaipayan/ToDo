@@ -33,7 +33,7 @@ export default class Scroll extends Component {
                 <TouchableOpacity
                 key={data.id}
                 activeOpacity={0.9}
-                onPress={() => this.props.navigation.navigate('Expanded')}
+                onPress={() => this.props.navigate("Expanded") }
                 >
                     <TaskGroup 
                     taskGroup={data}

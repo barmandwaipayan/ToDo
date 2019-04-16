@@ -29,6 +29,7 @@ export default class TaskGroupList extends Component {
                 </View>
                 <View style={{flex: 9}}>
                     <Scroll
+                    navigate={this.props.navigate}
                     taskGroups={this.props.taskGroups}
                     toggleStatus={this.props.toggleStatus}
                     style={styles.scroll}

@@ -7,7 +7,7 @@ export default class HeaderGroup extends Component {
     return (
         <View style={styles.row}>
             <Text style={styles.header}>Tasks Lists</Text>
-            <TouchableOpacity style={{flex: 3}}
+            <TouchableOpacity style={{flex: 2}}
                 onPress={ () => {
                     this.props.toggleGroupModalVisibility(true);
                     }
@@ -28,7 +28,6 @@ const styles=StyleSheet.create({
         fontSize: 16,
     },
     addButton: {
-        flex: 1,
         backgroundColor: "rgb(251, 45, 75)",
         margin: "auto",
         borderRadius: 5,
