@@ -46,10 +46,11 @@ const styles=StyleSheet.create({
         flex: 10,
         fontSize: 25,
         fontWeight: "700",
-        alignItems: "flex-start"
+        alignItems: 'center',
+        justifyContent: "center",
     }
 })
 
 HeaderGroup.propTypes = {
-    toggleGroupModalVisibility: PropTypes.func,
+    toggleGroupModalVisibility: PropTypes.func.isRequired,
   };

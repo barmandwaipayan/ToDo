@@ -10,6 +10,8 @@ import React from "react";
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Home from "./components/Pages/Home/Home";
 import ExpandedDeck from "./components/Pages/CardExpanded/ExpandedDeck";
+// import AntIcon from 'react-native-vector-icons/AntDesign';
+// import { TouchableOpacity,Button} from 'react-native'
 
 export default class App extends React.Component {
   static navigationOptions = {
@@ -37,6 +39,14 @@ const RootStack = createStackNavigator(
         headerTitleStyle: {
           fontWeight: 'bold',
         },
+        // headerLeft: (
+        //   <TouchableOpacity onPress={() => alert('This is a button!')} style={{flex:1,}}>
+        //   <AntIcon
+        //     name="left"
+        //     color="#fff"
+        //   />
+        //   </TouchableOpacity>
+        // ),
       },
     },
   );

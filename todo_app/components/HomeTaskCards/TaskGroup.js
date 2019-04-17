@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     taskGroup2: {
         flex: 1,
         width: 220,
-        backgroundColor: "rgba(31, 128, 253, 0.7)",
+        backgroundColor: "rgb(45, 154, 241)",
         borderRadius: 30,
         margin: 20,
         marginBottom: 30,
@@ -75,9 +75,9 @@ const styles = StyleSheet.create({
 })
 
 TaskGroup.propTypes = {
-    addTask: PropTypes.func,
-    taskGroup: PropTypes.object,
-    toggleStatus: PropTypes.func,
-    toggleModalVisibility: PropTypes.func,
-    setSelectedGroup: PropTypes.func,
+    addTask: PropTypes.func.isRequired,
+    taskGroup: PropTypes.object.isRequired,
+    toggleStatus: PropTypes.func.isRequired,
+    toggleModalVisibility: PropTypes.func.isRequired,
+    setSelectedGroup: PropTypes.func.isRequired,
   };

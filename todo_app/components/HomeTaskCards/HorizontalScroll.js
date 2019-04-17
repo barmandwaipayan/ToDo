@@ -62,9 +62,9 @@ const styles = StyleSheet.create({
 });
 
 Scroll.propTypes = {
-  addTask: PropTypes.func,
-  taskGroups: PropTypes.array,
-  toggleStatus: PropTypes.func,
-  toggleModalVisibility: PropTypes.func,
-  setSelectedGroup: PropTypes.func,
+  addTask: PropTypes.func.isRequired,
+  taskGroups: PropTypes.array.isRequired,
+  toggleStatus: PropTypes.func.isRequired,
+  toggleModalVisibility: PropTypes.func.isRequired,
+  setSelectedGroup: PropTypes.func.isRequired,
 };

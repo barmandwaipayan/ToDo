@@ -143,5 +143,5 @@ const styles = StyleSheet.create ({
 })
 
 AddTaskGroupModal.propTypes = {
-    addTaskGroup: PropTypes.func,
+    addTaskGroup: PropTypes.func.isRequired,
   };

@@ -5,10 +5,9 @@ import PropTypes from 'prop-types';
 export default class AddTask extends Component {
   render() {
     return (
-      <View style={styles.addTaskButton}>
+      <View style={styles.plusSymbol}>
         <TouchableOpacity
-          onPress={ () => {
-              
+          onPress={ () => { 
               this.props.setSelectedGroup(this.props.id);
               this.props.toggleModalVisibility(true);
             }
@@ -20,15 +19,15 @@ export default class AddTask extends Component {
   }
 }
 
-styles = StyleSheet.create({
-  addTaskButton: {
+const styles = StyleSheet.create({
+  plusSymbol: {
     flex: 1,
     height: 30,
     width: 30,
     marginHorizontal: 10,    
   },
   buttonText1: {
-    color: "rgba(31, 129, 255, 0.9)",
+    color: "rgb(45, 154, 241)",
     fontSize: 20,
     fontWeight: 'bold',
   },
@@ -40,6 +39,6 @@ styles = StyleSheet.create({
 })
 
 AddTask.propTypes = {
-    addTask: PropTypes.func,
-    id: PropTypes.string,
+    addTask: PropTypes.func.isRequired,
+    id: PropTypes.string.isRequired,
   };

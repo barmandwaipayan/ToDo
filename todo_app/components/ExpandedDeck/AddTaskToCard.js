@@ -11,7 +11,8 @@ export default class AddTaskToCard extends Component {
               this.props.toggleModalVisibility(true);
               this.props.setSelectedGroup(this.props.id);
             }
-        }>
+          } 
+          >
           <Text style={(this.props.index % 2 === 0) ? styles.buttonExpandedText1 : styles.buttonExpandedText2}>+</Text>
         </TouchableOpacity>
       </View>
@@ -27,7 +28,7 @@ styles = StyleSheet.create({
     justifyContent: "center",  
   },
   buttonExpandedText1: {
-    color: "rgba(31, 129, 255, 0.9)",
+    color: "rgb(45, 154, 241)",
     fontSize: 40,
   },
   buttonExpandedText2: {
@@ -37,6 +38,6 @@ styles = StyleSheet.create({
 })
 
 AddTaskToCard.propTypes = {
-    addTask: PropTypes.func,
-    id: PropTypes.string,
+    addTask: PropTypes.func.isRequired,
+    id: PropTypes.string.isRequired,
   };

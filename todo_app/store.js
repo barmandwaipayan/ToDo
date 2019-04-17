@@ -41,7 +41,51 @@ state = {
         id: uuidv4(),
     },
     {
-        title: "G1",
+        title: "G2",
+        taskList: [
+            {
+                activity: "test1",
+                from: t1,
+                to: t1,
+                completed: true,
+                description: "gagdfs gfgsdf gsdgfisgd iufgkjdh sgiufsg",
+                id: uuidv4(), 
+            },
+            {
+                activity: "test2",
+                from: t1,
+                to: t1,
+                completed: false,
+                description: "dsaflkds djshfkj, kdjshfih,fhsdakfh fasdfadsdsf fgagdfs gfgsdf gsdgfisgd iufgkjdh sgiufsg",
+                id: uuidv4(), 
+            }
+        ],
+        id: uuidv4(),
+    },
+    {
+        title: "G3",
+        taskList: [
+            {
+                activity: "test1",
+                from: t1,
+                to: t1,
+                completed: true,
+                description: "gagdfs gfgsdf gsdgfisgd iufgkjdh sgiufsg",
+                id: uuidv4(), 
+            },
+            {
+                activity: "test2",
+                from: t1,
+                to: t1,
+                completed: false,
+                description: "dsaflkds djshfkj, kdjshfih,fhsdakfh fasdfadsdsf fgagdfs gfgsdf gsdgfisgd iufgkjdh sgiufsg",
+                id: uuidv4(), 
+            }
+        ],
+        id: uuidv4(),
+    },
+    {
+        title: "G4",
         taskList: [
             {
                 activity: "test1",

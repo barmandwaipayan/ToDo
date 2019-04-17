@@ -49,15 +49,15 @@ const styles = StyleSheet.create({
 })
 
 TaskGroupList.propTypes = {
-    selectedGroup: PropTypes.string,
-    setSelectedGroup: PropTypes.func,
-    helpIdGenerator: PropTypes.func,
-    addTaskGroup: PropTypes.func,
-    addTask: PropTypes.func,
-    toggleStatus: PropTypes.func,
-    toggleGroupModalVisibility: PropTypes.func,
-    toggleModalVisibility: PropTypes.func,
-    taskGroups: PropTypes.array,
-    addTaskModalVisible: PropTypes.bool,
-    addTaskGroupModalVisible: PropTypes.bool,
+    selectedGroup: PropTypes.string.isRequired,
+    setSelectedGroup: PropTypes.func.isRequired,
+    helpIdGenerator: PropTypes.func.isRequired,
+    addTaskGroup: PropTypes.func.isRequired,
+    addTask: PropTypes.func.isRequired,
+    toggleStatus: PropTypes.func.isRequired,
+    toggleGroupModalVisibility: PropTypes.func.isRequired,
+    toggleModalVisibility: PropTypes.func.isRequired,
+    taskGroups: PropTypes.array.isRequired,
+    addTaskModalVisible: PropTypes.bool.isRequired,
+    addTaskGroupModalVisible: PropTypes.bool.isRequired,
   };

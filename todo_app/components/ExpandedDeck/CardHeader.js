@@ -26,5 +26,5 @@ const styles = StyleSheet.create({
 })
 
 CardHeader.propTypes = {
-  header: PropTypes.string,
+  header: PropTypes.string.isRequired,
 };

@@ -211,8 +211,8 @@ const styles = StyleSheet.create ({
 })
 
 AddTaskModal.propTypes = {
-    id: PropTypes.string,
-    visible: PropTypes.bool,
-    addTask: PropTypes.func,
-    selectedGroup: PropTypes.string,
+    addTask: PropTypes.func.isRequired,
+    visible: PropTypes.bool.isRequired,
+    toggleModalVisibility: PropTypes.func.isRequired,
+    selectedGroup: PropTypes.string.isRequired,
   };

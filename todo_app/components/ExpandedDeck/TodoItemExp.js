@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, CheckBox, StyleSheet, Dimensions} from 'react-native';
+import { Text, View, StyleSheet, Dimensions} from 'react-native';
 import PropTypes from 'prop-types';
+import Checkbox from "react-native-custom-checkbox"
 
 const {height, width} = Dimensions.get("window")
 
@@ -10,9 +11,8 @@ export default class TodoItemExp extends React.Component {
     this.props.to.getMinutes() != this.props.from.getMinutes()){
       return(
         <View style={styles.todoItem}> 
-            <CheckBox
-              containerStyle={styles.checkBox}
-              style={styles.checkBox}
+            <Checkbox
+              style={((this.props.index % 2 === 0) ? styles.checkBox1 : styles.checkBox2)}
               value={this.props.completed}
               onChange={() => {
                 this.props.toggleStatus(this.props.id);
@@ -33,9 +33,9 @@ export default class TodoItemExp extends React.Component {
     else {
       return(
         <View style={styles.todoItem} >
-          <CheckBox
-            containerStyle={styles.checkBox}
-            style={styles.checkBox}
+          <Checkbox
+            // containerStyle={styles.checkBox}
+            style={((this.props.index % 2 === 0) ? styles.checkBox1 : styles.checkBox2)}
             value={this.props.completed}
             onChange={() => {
               this.props.toggleStatus(this.props.id);
@@ -55,8 +55,15 @@ export default class TodoItemExp extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    checkBox: {
-      
+    checkBox1: {
+      backgroundColor: "rgba(0,0,0,0)",
+      color:'rgb(148, 178, 208)',
+      borderRadius: 5
+    },
+    checkBox2: {
+      backgroundColor: "rgba(0,0,0,0)",
+      color:'#fff',
+      borderRadius: 5
     },
     todoItem: {
       flexDirection: "row",
@@ -89,8 +96,8 @@ const styles = StyleSheet.create({
 )
 
 TodoItemExp.propTypes = {
-  from: PropTypes.object,
-  to: PropTypes.object,
-  id: PropTypes.string,
-  activity: PropTypes.string,
+  from: PropTypes.object.isRequired,
+  to: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
+  activity: PropTypes.string.isRequired,
 };

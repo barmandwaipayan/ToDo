@@ -55,17 +55,15 @@ export default class Card extends Component {
             </View>
         </View>
     )
-
     }
 }
-
 
 const styles = StyleSheet.create({
     taskGroup1: {
         backgroundColor: "#fff",
     },
     taskGroup2: {
-        backgroundColor: "rgba(31, 128, 253, 0.7)",
+        backgroundColor: "rgb(45, 154, 241)",
     },
     headRow: {
         flex: 1,
@@ -77,13 +75,13 @@ const styles = StyleSheet.create({
 })
 
 Card.propTypes = {
-    addTaskModalVisible: PropTypes.bool,
-    addTask: PropTypes.func,
-    taskGroup: PropTypes.object,
-    toggleStatus: PropTypes.func,
-    toggleModalVisibility: PropTypes.func,
-    setSelectedGroup: PropTypes.func,
-    index: PropTypes.number,
-    id: PropTypes.string,
-    setSelectedGroup: PropTypes.func
+    addTaskModalVisible: PropTypes.bool.isRequired,
+    addTask: PropTypes.func.isRequired,
+    taskGroup: PropTypes.object.isRequired,
+    toggleStatus: PropTypes.func.isRequired,
+    toggleModalVisibility: PropTypes.func.isRequired,
+    setSelectedGroup: PropTypes.func.isRequired,
+    index: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
+    setSelectedGroup: PropTypes.func.isRequired,
   };

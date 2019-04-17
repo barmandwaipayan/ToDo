@@ -93,8 +93,8 @@ const styles = StyleSheet.create({
 )
 
 TodoItem.propTypes = {
-  from: PropTypes.object,
-  to: PropTypes.object,
-  id: PropTypes.string,
-  activity: PropTypes.string,
+  from: PropTypes.object.isRequired,
+  to: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
+  activity: PropTypes.string.isRequired,
 };

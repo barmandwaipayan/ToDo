@@ -101,6 +101,7 @@ class ExpandedDeck extends Component {
             toggleModalVisibility={this.toggleModalVisibility}
             setSelectedGroup={this.setSelectedGroup}
             selectedGroup={this.state.selectedGroup}
+            index={this.props.navigation.state.params.touchedIndex}
         />
         </View>
     )
@@ -122,4 +123,27 @@ const mapDispatchToProps = dispatch => (
       groupModal,
     }, dispatch)
   );
-  export default connect(mapStateToProps, mapDispatchToProps)(ExpandedDeck);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpandedDeck);
+
+// const pageNav = createStackNavigator(
+//     {
+//         initialRouteName: 'Home',
+//         defaultNavigationOptions: {
+//           headerStyle: {
+//             backgroundColor: "rgb(237,241,244)",
+//             elevation: 0,
+//           },
+//           headerTitleStyle: {
+//             fontWeight: 'bold',
+//           },
+//           // headerLeft: (
+//           //   <TouchableOpacity onPress={() => alert('This is a button!')} style={{flex:1,}}>
+//           //   <AntIcon
+//           //     name="left"
+//           //     color="#fff"
+//           //   />
+//           //   </TouchableOpacity>
+//           // ),
+//         },
+//     }
+// }

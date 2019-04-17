@@ -26,5 +26,5 @@ const styles = StyleSheet.create({
 })
 
 TaskGroupTitle.propTypes = {
-  header: PropTypes.string,
+  header: PropTypes.string.isRequired,
 };
