@@ -29,9 +29,6 @@ export default class TodoItemExp extends React.Component {
                   <Text> { this.props.to.getHours() } : { this.props.to.getMinutes() } </Text>
               </Text>
           </View>
-          <View>
-            <Text>{this.props.description}</Text>
-          </View>
         </View>
       )
     } 
@@ -53,9 +50,6 @@ export default class TodoItemExp extends React.Component {
             <Text> at </Text>
             <Text> { this.props.from.getHours() } : { this.props.from.getMinutes() } </Text>
           </Text>
-        </View>
-        <View>
-          <Text>{this.props.description}</Text>
         </View>
       </View>
       )
