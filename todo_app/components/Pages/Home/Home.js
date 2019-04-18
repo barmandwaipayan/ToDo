@@ -89,10 +89,8 @@ setSelectedGroup = (id) => {
           <View style={styles.app} >
             <View style ={{flex: 1}}>
             </View>
-            <View style={{flex: 5, justifyContent: "center", alignContent: "center"}, margin: "auto"}>
-              <View style={{flex: 1, justifyContent: "center",alignContent: "center"}}>  
-                <AnalogClock />
-              </View>
+            <View style={{flex: 5, alignContent: "center"}}>
+              <AnalogClock />
             </View>
             <View style={[styles.container, {flex: 7} ]}>
               <TaskGroupList
