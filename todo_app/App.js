@@ -10,8 +10,7 @@ import React from "react";
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Home from "./components/Pages/Home/Home";
 import ExpandedDeck from "./components/Pages/CardExpanded/ExpandedDeck";
-// import AntIcon from 'react-native-vector-icons/AntDesign';
-// import { TouchableOpacity,Button} from 'react-native'
+import { Image, View, TouchableOpacity,Button} from 'react-native'
 
 export default class App extends React.Component {
   static navigationOptions = {
@@ -39,17 +38,42 @@ const RootStack = createStackNavigator(
         headerTitleStyle: {
           fontWeight: 'bold',
         },
-        // headerLeft: (
-        //   <TouchableOpacity onPress={() => alert('This is a button!')} style={{flex:1,}}>
-        //   <AntIcon
-        //     name="left"
-        //     color="#fff"
-        //   />
-        //   </TouchableOpacity>
-        // ),
+        headerRight:
+        (
+          <View style={{marginHorizontal: 10,}}>
+          <TouchableOpacity
+            style={{
+              borderWidth:1,
+              alignItems:'center',
+              justifyContent:'center',
+              width:40,
+              height:40,
+              backgroundColor:'#fff',
+              borderRadius:50,
+              marginHorizontal: 10,
+            }}
+          >
+            <Image 
+              source={require('./image/profile.png')}
+              style={{
+                borderWidth:1,
+                alignItems:'center',
+                justifyContent:'center',
+                width:40,
+                height:40,
+                backgroundColor:'#fff',
+                borderRadius:50,
+                marginHorizontal: 10,
+              }}
+            />
+          </TouchableOpacity>
+          </View>
+        )
+      
       },
     },
   );
+
 
 const AppContainer = createAppContainer(RootStack);
 

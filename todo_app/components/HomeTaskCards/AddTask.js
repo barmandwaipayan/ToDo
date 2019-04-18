@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
 })
 
 AddTask.propTypes = {
-    addTask: PropTypes.func.isRequired,
     id: PropTypes.string.isRequired,
+    setSelectedGroup: PropTypes.func.isRequired,
+    toggleModalVisibility: PropTypes.func.isRequired,
   };

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TouchableWithoutFeedback, View, CheckBox, StyleSheet, ScrollView} from 'react-native';
+import { TouchableWithoutFeedback, View, StyleSheet, ScrollView} from 'react-native';
 import TodoItem from "./TodoItem"
 import TaskGroupTitle from "./TaskGroupTitle"
 import AddTask from "./AddTask"

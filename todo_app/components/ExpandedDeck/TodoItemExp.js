@@ -10,31 +10,36 @@ export default class TodoItemExp extends React.Component {
     if (this.props.to.getHours() != this.props.from.getHours() || 
     this.props.to.getMinutes() != this.props.from.getMinutes()){
       return(
-        <View style={styles.todoItem}> 
-            <Checkbox
-              style={((this.props.index % 2 === 0) ? styles.checkBox1 : styles.checkBox2)}
-              value={this.props.completed}
-              onChange={() => {
-                this.props.toggleStatus(this.props.id);
-                }
-              } 
-            />
-            <Text style={ [(this.props.completed) ? styles.txtCompleted : styles.txt,
-               {fontSize: width * 0.05,}]}>    
-                <Text>{ this.props.activity}</Text>
-                <Text> from </Text>
-                <Text style={styles.time}> { this.props.from.getHours() } : { this.props.from.getMinutes() } </Text>
-                <Text> to </Text>
-                <Text> { this.props.to.getHours() } : { this.props.to.getMinutes() } </Text>
-            </Text>
-        </View> 
+        <View>
+          <View style={styles.todoItem}> 
+              <Checkbox
+                style={((this.props.index % 2 === 0) ? styles.checkBox1 : styles.checkBox2)}
+                value={this.props.completed}
+                onChange={() => {
+                  this.props.toggleStatus(this.props.id);
+                  }
+                } 
+              />
+              <Text style={ [(this.props.completed) ? styles.txtCompleted : styles.txt,
+                {fontSize: width * 0.05,}]}>    
+                  <Text>{ this.props.activity}</Text>
+                  <Text> from </Text>
+                  <Text style={styles.time}> { this.props.from.getHours() } : { this.props.from.getMinutes() } </Text>
+                  <Text> to </Text>
+                  <Text> { this.props.to.getHours() } : { this.props.to.getMinutes() } </Text>
+              </Text>
+          </View>
+          <View>
+            <Text>{this.props.description}</Text>
+          </View>
+        </View>
       )
     } 
     else {
       return(
+      <View>
         <View style={styles.todoItem} >
           <Checkbox
-            // containerStyle={styles.checkBox}
             style={((this.props.index % 2 === 0) ? styles.checkBox1 : styles.checkBox2)}
             value={this.props.completed}
             onChange={() => {
@@ -49,6 +54,10 @@ export default class TodoItemExp extends React.Component {
             <Text> { this.props.from.getHours() } : { this.props.from.getMinutes() } </Text>
           </Text>
         </View>
+        <View>
+          <Text>{this.props.description}</Text>
+        </View>
+      </View>
       )
     }
   }
@@ -56,13 +65,15 @@ export default class TodoItemExp extends React.Component {
 
 const styles = StyleSheet.create({
     checkBox1: {
-      backgroundColor: "rgba(0,0,0,0)",
-      color:'rgb(148, 178, 208)',
+      backgroundColor: "transparent",
+      borderColor:'rgb(148, 163, 166)',
+      color: "transparent",
       borderRadius: 5
     },
     checkBox2: {
-      backgroundColor: "rgba(0,0,0,0)",
-      color:'#fff',
+      backgroundColor: "transparent",
+      borderColor:'#fff',
+      color: "transparent",
       borderRadius: 5
     },
     todoItem: {

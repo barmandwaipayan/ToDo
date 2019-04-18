@@ -16,7 +16,7 @@ t1 = new Date()
 state = {
     addTaskModalVisible: false,
     addTaskGroupModalVisible: false,
-    selectedGroup: null,
+    selectedGroup: "",
     taskGroups: [
     {
         title: "G1",

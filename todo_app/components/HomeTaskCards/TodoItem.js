@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, CheckBox, StyleSheet} from 'react-native';
+import { Text, View, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
+import Checkbox from "react-native-custom-checkbox"
 
 export default class TodoItem extends React.Component {
   render(){
@@ -8,9 +9,9 @@ export default class TodoItem extends React.Component {
     this.props.to.getMinutes() != this.props.from.getMinutes()){
       return(
         <View style={styles.todoItem}> 
-            <CheckBox
+            <Checkbox
               containerStyle={styles.checkBox}
-              style={styles.checkBox}
+              style={((this.props.index % 2 === 0) ? styles.checkBox1 : styles.checkBox2)}
               value={this.props.completed}
               onChange={() => {
                 this.props.toggleStatus(this.props.id);
@@ -30,9 +31,9 @@ export default class TodoItem extends React.Component {
     else {
       return(
         <View style={styles.todoItem} >
-          <CheckBox
+          <Checkbox
             containerStyle={styles.checkBox}
-            style={styles.checkBox}
+            style={((this.props.index % 2 === 0) ? styles.checkBox1 : styles.checkBox2)}
             value={this.props.completed}
             onChange={() => {
               this.props.toggleStatus(this.props.id);
@@ -52,8 +53,17 @@ export default class TodoItem extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    checkBox: {
-      
+    checkBox1: {
+      backgroundColor: "transparent",
+      borderColor:'rgb(148, 163, 166)',
+      color: "transparent",
+      borderRadius: 5,
+    },
+    checkBox2: {
+      backgroundColor: "transparent",
+      borderColor:'#fff',
+      color: "transparent",
+      borderRadius: 5
     },
     todoItem: {
       flexDirection: "row",
@@ -66,12 +76,12 @@ const styles = StyleSheet.create({
     txt1:{
       width: 150,
       color: 'rgb(148, 163, 166)',
-      margin: 5,
+      marginHorizontal: 5,
     },
     txt2:{
       width: 150,
       color: '#fff',
-      margin: 5,
+      marginHorizontal: 5,
     },
     txtCompleted1:{
       width: 150,

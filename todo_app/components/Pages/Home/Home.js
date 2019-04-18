@@ -10,11 +10,12 @@ import { addGroup as addTaskGroupStore } from "../../../actions/addTaskGroup"
 import { complete } from "../../../actions/complete"
 import { taskModal } from "../../../actions/taskModal"
 import { groupModal } from "../../../actions/groupModal"
+import AnalogClock from "../../Clock/AnalogClock"
 
 class Home extends Component {
   constructor(props){
     super(props);
-    this.state = this.props.global
+    this.state = {...this.props.global}
     this.toggleStatus = this.toggleStatus.bind(this);
 }
 
@@ -86,10 +87,12 @@ setSelectedGroup = (id) => {
       return (
         <View style={{flex: 1,}}>
           <View style={styles.app} >
-            <View style ={{flex: 1}}></View>
-            {/* <View style={[styles.container, {flex: 5} ]}>
-            </View> */}
-            <View style={{flex: 5,}}>
+            <View style ={{flex: 1}}>
+            </View>
+            <View style={{flex: 5, justifyContent: "center", alignContent: "center"}, margin: "auto"}>
+              <View style={{flex: 1, justifyContent: "center",alignContent: "center"}}>  
+                <AnalogClock />
+              </View>
             </View>
             <View style={[styles.container, {flex: 7} ]}>
               <TaskGroupList
@@ -123,20 +126,6 @@ setSelectedGroup = (id) => {
       alignItems: 'center'
     }
   })
-
-  Home.propTypes = {
-    selectedGroup: PropTypes.string,
-    setSelectedGroup: PropTypes.func,
-    helpIdGenerator: PropTypes.func,
-    addTaskGroup: PropTypes.func,
-    addTask: PropTypes.func,
-    toggleStatus: PropTypes.func,
-    toggleGroupModalVisibility: PropTypes.func,
-    toggleModalVisibility: PropTypes.func,
-    taskGroups: PropTypes.array,
-    addTaskModalVisible: PropTypes.bool,
-    addTaskGroupModalVisible: PropTypes.bool,
-  };
 
 const mapStateToProps = state => {
   return {

@@ -10,8 +10,16 @@ import { complete } from "../../../actions/complete"
 import { taskModal } from "../../../actions/taskModal"
 import { groupModal } from "../../../actions/groupModal"
 import { BackHandler } from 'react-native';
+import AntIcon from 'react-native-vector-icons/AntDesign';
 
 class ExpandedDeck extends Component {
+    static navigationOptions = ({navigation}) => {
+        return{
+            headerLeft:(<View style={{marginHorizontal: 10,}}><AntIcon.Button name="left" backgroundColor="transparent" 
+            underlayColor="rgba(50, 50, 50, 0.1)"
+            color="rgb(45, 154, 241)" onPress={()=>{navigation.goBack(null)}}/></View>)
+            }
+        }
     constructor(props){
         super(props);
         this.state = this.props.global
@@ -124,26 +132,3 @@ const mapDispatchToProps = dispatch => (
     }, dispatch)
   );
 export default connect(mapStateToProps, mapDispatchToProps)(ExpandedDeck);
-
-// const pageNav = createStackNavigator(
-//     {
-//         initialRouteName: 'Home',
-//         defaultNavigationOptions: {
-//           headerStyle: {
-//             backgroundColor: "rgb(237,241,244)",
-//             elevation: 0,
-//           },
-//           headerTitleStyle: {
-//             fontWeight: 'bold',
-//           },
-//           // headerLeft: (
-//           //   <TouchableOpacity onPress={() => alert('This is a button!')} style={{flex:1,}}>
-//           //   <AntIcon
-//           //     name="left"
-//           //     color="#fff"
-//           //   />
-//           //   </TouchableOpacity>
-//           // ),
-//         },
-//     }
-// }

@@ -35,6 +35,7 @@ export default class TaskGroupList extends Component {
                     style={styles.scroll}
                     toggleModalVisibility={this.props.toggleModalVisibility}
                     setSelectedGroup={this.props.setSelectedGroup}
+                    addTask={this.props.addTask}
                     />
                 </View>
             </View>
@@ -51,7 +52,6 @@ const styles = StyleSheet.create({
 TaskGroupList.propTypes = {
     selectedGroup: PropTypes.string.isRequired,
     setSelectedGroup: PropTypes.func.isRequired,
-    helpIdGenerator: PropTypes.func.isRequired,
     addTaskGroup: PropTypes.func.isRequired,
     addTask: PropTypes.func.isRequired,
     toggleStatus: PropTypes.func.isRequired,
@@ -60,4 +60,5 @@ TaskGroupList.propTypes = {
     taskGroups: PropTypes.array.isRequired,
     addTaskModalVisible: PropTypes.bool.isRequired,
     addTaskGroupModalVisible: PropTypes.bool.isRequired,
+    addTask: PropTypes.func.isRequired,
   };

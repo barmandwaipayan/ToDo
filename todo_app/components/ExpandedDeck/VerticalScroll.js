@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
 VerticalScroll.propTypes = {
     addTaskModalVisible: PropTypes.bool.isRequired,
     addTask: PropTypes.func.isRequired,
-    taskGroup: PropTypes.object.isRequired,
+    taskGroups: PropTypes.array.isRequired,
     toggleStatus: PropTypes.func.isRequired,
     toggleModalVisibility: PropTypes.func.isRequired,
     setSelectedGroup: PropTypes.func.isRequired,
