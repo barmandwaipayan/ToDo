@@ -12,13 +12,14 @@ export default class TodoItem extends React.Component {
             <Checkbox
               containerStyle={styles.checkBox}
               style={((this.props.index % 2 === 0) ? styles.checkBox1 : styles.checkBox2)}
-              value={this.props.completed}
+              checked={this.props.completed}
               onChange={() => {
                 this.props.toggleStatus(this.props.id);
                 }
               } 
             />
-            <Text numberOfLines={1} ellipsizeMode='tail' style={ (this.props.completed) ? styles.txtCompleted : styles.txt }>    
+            <Text numberOfLines={1} ellipsizeMode='tail' style={ (this.props.completed)? ((this.props.index % 2 === 0) ? styles.txtCompleted1 : styles.txtCompleted2) : 
+            ((this.props.index % 2 === 0) ? styles.txt1 : styles.txt2) }>    
                 <Text>{ this.props.activity}</Text>
                 <Text> from </Text>
                 <Text style={styles.time}> { this.props.from.getHours() } : { this.props.from.getMinutes() } </Text>
@@ -34,7 +35,7 @@ export default class TodoItem extends React.Component {
           <Checkbox
             containerStyle={styles.checkBox}
             style={((this.props.index % 2 === 0) ? styles.checkBox1 : styles.checkBox2)}
-            value={this.props.completed}
+            checked={this.props.completed}
             onChange={() => {
               this.props.toggleStatus(this.props.id);
               }
@@ -54,16 +55,16 @@ export default class TodoItem extends React.Component {
 
 const styles = StyleSheet.create({
     checkBox1: {
-      backgroundColor: "transparent",
+      backgroundColor: "rgb(148, 163, 166)",
       borderColor:'rgb(148, 163, 166)',
-      color: "transparent",
+      color: "white",
       borderRadius: 5,
     },
     checkBox2: {
-      backgroundColor: "transparent",
-      borderColor:'#fff',
-      color: "transparent",
-      borderRadius: 5
+      backgroundColor: "white",
+      borderColor:'white',
+      color: "rgb(45, 154, 241)",
+      borderRadius: 5,
     },
     todoItem: {
       flexDirection: "row",
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
       paddingHorizontal: 20,
     },
     time: {
-      color: 'green',
+      color: 'skyblue',
     },
     txt1:{
       width: 150,
@@ -86,18 +87,18 @@ const styles = StyleSheet.create({
     txtCompleted1:{
       width: 150,
       color: 'rgb(186, 204, 217)',
-      margin: 5,
       textDecorationLine: "line-through",
       textDecorationStyle: "solid",
       textDecorationColor: "rgb(158, 188, 218)",
+      marginHorizontal: 5,
     },
     txtCompleted2:{
       width: 150,
       color: 'rgb(220, 226, 231)',
-      margin: 5,
       textDecorationLine: "line-through",
       textDecorationStyle: "solid",
       textDecorationColor: "rgb(158, 188, 218)",
+      marginHorizontal: 5,
     }
 }
 )

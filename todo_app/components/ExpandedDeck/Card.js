@@ -18,6 +18,7 @@ export default class Card extends Component {
             from={this.props.taskGroup.taskList[i].from}
             to={this.props.taskGroup.taskList[i].to}
             completed={this.props.taskGroup.taskList[i].completed} 
+            description={this.props.taskGroup.taskList[i].description}
             id={this.props.taskGroup.taskList[i].id}
             toggleStatus={this.props.toggleStatus}
             index={this.props.index}

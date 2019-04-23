@@ -130,9 +130,12 @@ class AddTaskModal extends Component {
                             <TouchableHighlight
                                 style={styles.addTaskButton}
                                 onPress = {() => {
-                                    if (this.state.activity.trim() === "") {
-                                        var add = false;
-                                        this.setState(() => ({ activityError: "Activity name required." }));
+                                    var add = false;
+                                    if (this.state.activity.trim() === "" || this.state.from.getTime() > this.state.to.getTime()) {
+                                        if(this.state.activity.trim() === "")
+                                            this.setState(() => ({ activityError: "Activity name required." }));
+                                        else
+                                            this.setState(() => ({ activityError: "To should be greater than or equal to From" }));
                                         } else {
                                         this.setState(() => ({ activityError: null }));
                                         add = true;

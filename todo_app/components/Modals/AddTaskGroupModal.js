@@ -100,7 +100,7 @@ const styles = StyleSheet.create ({
    container: {
       alignItems: 'center',
       backgroundColor: "rgb(237,241,244)",
-      padding: 100
+      padding: 100,
    },
    groupName: {
     height: 40,
